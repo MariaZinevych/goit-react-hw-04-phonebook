@@ -4,6 +4,7 @@ import { Phonebook } from './Name/name';
 import { GlobalStyle } from 'Global.styled';
 import { ContactList } from './Contactlist/contactList';
 import { Filter } from './Filter/filter';
+import { Toaster, toast } from 'react-hot-toast';
 
 const contact = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -33,7 +34,7 @@ export const App = () => {
     );
 
     if (isInContacts) {
-      alert(`${newQuiz.name} is already in contacts`);
+      toast.error(`${newQuiz.name} is already in contacts`);
 
       return;
     }
@@ -41,7 +42,7 @@ export const App = () => {
   };
 
   const onChangeFilter = event => {
-    setFilter({ filter: event.target.value });
+    setFilter(event.target.value);
   };
 
   const removeContact = contactId => {
@@ -57,6 +58,7 @@ export const App = () => {
       <Filter value={filter} onChange={onChangeFilter} />
       <ContactList onValues={visiebleList} onDelete={removeContact} />
       <GlobalStyle />
+      <Toaster />
     </>
   );
 };
